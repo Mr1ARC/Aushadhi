@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Upload, Search, CheckCircle, AlertTriangle, XCircle, Clock, Pill } from 'lucide-react';
+import { Upload, Search, CircleCheck as CheckCircle, TriangleAlert as AlertTriangle, Circle as XCircle, Clock, Pill } from 'lucide-react';
 import './App.css';
 
 function App() {
