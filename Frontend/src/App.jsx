@@ -34,7 +34,7 @@ const Logo = () => (
       </svg>
     </div>
     <div>
-      <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">MedVerify-AI</span>
+      <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">Aushadhi-OCR</span>
       <p className="text-xs text-gray-500 -mt-1">Medicine Verification</p>
     </div>
   </div>
@@ -93,8 +93,8 @@ const Footer = () => (
         <div className="md:col-span-2">
           <Logo />
           <p className="mt-4 text-gray-300 max-w-md">
-            MedVerify-AI is an advanced medicine verification system that helps identify authentic pharmaceutical products 
-            and detect potential counterfeits using cutting-edge OCR technology.
+            AI-powered medicine verification system that helps identify authentic pharmaceutical products 
+            and detect potential counterfeits using advanced OCR technology.
           </p>
           <div className="flex space-x-4 mt-6">
             <a href="https://github.com/Mr1ARC" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors">
@@ -131,7 +131,7 @@ const Footer = () => (
       </div>
       
       <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-        <p>&copy; 2024 MedVerify-AI. All rights reserved.</p>
+        <p>&copy; 2024 Aushadhi-OCR. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -415,8 +415,7 @@ function App() {
     const formData = new FormData();
     formData.append('image', selectedFile);
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://127.0.0.1:5001';
-      const response = await fetch(`${apiUrl}/api/verify`, {
+      const response = await fetch('http://127.0.0.1:5001/api/verify', {
         method: 'POST',
         body: formData,
       });
@@ -459,7 +458,7 @@ function App() {
             <span className="text-sm font-semibold">{result.details.brand_name}</span>
           </div>
           <div className="flex justify-between items-center py-2 border-b border-green-200">
-            <span className="text-sm font-medium">Composition:</span>
+            <span className="text-sm font-medium">Generic Name:</span>
             <span className="text-sm text-right max-w-48">{result.details.composition}</span>
           </div>
           <div className="flex justify-between items-center py-2">
@@ -501,8 +500,8 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
-              MedVerify-AI
-              <span className="block text-blue-600">Medicine Verification</span>
+              Verify Medicine
+              <span className="block text-blue-600">Authenticity</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
               AI-powered OCR technology to identify authentic pharmaceutical products 

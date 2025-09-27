@@ -14,7 +14,7 @@ fi
 # Check if remote origin exists
 if ! git remote | grep -q origin; then
     echo "Please add your GitHub repository as origin:"
-    echo "git remote add origin https://github.com/yourusername/aushadhi-ocr.git"
+    echo "git remote add origin https://github.com/Mr1ARC/aushadhi-ocr.git"
     exit 1
 fi
 

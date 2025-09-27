@@ -42,7 +42,7 @@ all_medicines, known_brand_names = load_medicines_from_csv()
 @app.route("/")
 def health_check():
     """A simple health check to confirm the server is running."""
-    return jsonify({"status": "success", "message": "MedVerify-AI API is running!"})
+    return jsonify({"status": "success", "message": "Aushadhi-OCR API is running!"})
 
 @app.route("/api/verify", methods=['POST'])
 def verify_medicine():
