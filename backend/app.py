@@ -5,17 +5,11 @@ import easyocr
 from thefuzz import process
 from flask_cors import CORS 
 
-
-
-
 # Initialize the Flask application
 app = Flask(__name__)
-CORS(app)
+CORS(app) # This line gives your frontend permission to connect
 
-
-# --- Pre-load Models and Data (for performance) ---
-# We do this once when the server starts, so we don't have to reload
-# the models and data on every single API request. This is much faster.
+# --- Pre-load Models and Data ---
 print("Loading EasyOCR reader...")
 reader = easyocr.Reader(['en'])
 print("EasyOCR reader loaded.")
@@ -25,33 +19,34 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-
-def load_medicines_from_csv(filename="medicines.csv"):
-    """Function to load our trusted database from the CSV file."""
+# --- MODIFIED FUNCTION FOR YOUR NEW CSV ---
+def load_medicines_from_csv(filename="Finally.csv"):
+    """Function to load the trusted database from your new two-column CSV file."""
     medicines = []
-    with open(filename, mode='r', encoding='utf-8') as infile:
-        reader = csv.DictReader(infile)
+    brand_names = []
+    # Use 'utf-8-sig' to handle potential BOM characters in CSV files
+    with open(filename, mode='r', encoding='utf-8-sig') as infile:
+        # Use csv.reader for files without a header
+        reader = csv.reader(infile)
         for row in reader:
-            medicines.append(row)
-    print(f"Loaded {len(medicines)} medicine records from CSV.")
-    return medicines
+            if len(row) == 2: # Ensure the row has exactly two columns
+                composition, brand_name = row
+                medicines.append({"composition": composition.strip(), "brand_name": brand_name.strip()})
+                brand_names.append(brand_name.strip())
+    print(f"Loaded {len(medicines)} medicine records from {filename}.")
+    return medicines, brand_names
 
-all_medicines = load_medicines_from_csv()
-known_brand_names = [med['brand_name'] for med in all_medicines]
+all_medicines, known_brand_names = load_medicines_from_csv()
 
 # --- API Endpoints ---
 @app.route("/")
 def health_check():
     """A simple health check to confirm the server is running."""
-    return jsonify({"status": "success", "message": "Aushadhi-OCR API is running!"})
-
-# In app.py, replace the old verify_medicine function with this new one.
+    return jsonify({"status": "success", "message": "MedVerify-AI API is running!"})
 
 @app.route("/api/verify", methods=['POST'])
 def verify_medicine():
-    """
-    The main endpoint to verify a medicine image.
-    """
+    """The main endpoint to verify a medicine image."""
     # 1. Check if the 'image' key is in the request
     if 'image' not in request.files:
         return jsonify({"status": "error", "message": "No image file provided."}), 400
@@ -70,7 +65,6 @@ def verify_medicine():
         }), 400
 
     # --- If all checks pass, proceed ---
-    
     temp_path = "temp_image.jpg"
     image_file.save(temp_path)
 
@@ -122,6 +116,6 @@ def verify_medicine():
         if os.path.exists(temp_path):
             os.remove(temp_path)
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5001))
+    app.run(debug=False, host="0.0.0.0", port=port)

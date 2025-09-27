@@ -1,4 +1,7 @@
 {
+  "name": "medverify-ai",
+  "version": "1.0.0",
+  "description": "AI-powered medicine verification system using OCR technology",
   "scripts": {
     "dev": "concurrently \"cd Frontend && npm run dev\" \"cd backend && python app.py\"",
     "frontend": "cd Frontend && npm run dev",
