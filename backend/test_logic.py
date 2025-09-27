@@ -19,7 +19,7 @@ known_brand_names = [med['brand_name'] for med in all_medicines]
 
 # 2. Initialize OCR
 reader = easyocr.Reader(['en'])
-image_path = 'test2.jpg' # Make sure this is still correct
+image_path = 'test3.jpeg' # Make sure this is still correct
 
 # 3. Process the image
 if not os.path.exists(image_path):
