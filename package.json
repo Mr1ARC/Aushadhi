@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev": "cd Frontend && npm run dev"
+  },
   "dependencies": {
     "lucide-react": "^0.544.0"
   }
