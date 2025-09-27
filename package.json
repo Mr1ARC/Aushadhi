@@ -1,8 +1,13 @@
 {
   "scripts": {
-    "dev": "cd Frontend && npm run dev"
+    "dev": "concurrently \"cd Frontend && npm run dev\" \"cd backend && python app.py\"",
+    "frontend": "cd Frontend && npm run dev",
+    "backend": "cd backend && python app.py"
   },
   "dependencies": {
     "lucide-react": "^0.544.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
   }
 }
