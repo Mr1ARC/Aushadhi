@@ -70,7 +70,7 @@ function App() {
         <p>Upload a medicine package image to verify</p>
         
         <div className="uploader">
-          <input type="file" accept="image/*" onChange={handleFileChange} />
+          <input type="file" accept="image/png, image/jpeg, image/bmp" onChange={handleFileChange} />
           <button onClick={handleAnalyze} disabled={!selectedFile || isLoading}>
             {isLoading ? 'Analyzing...' : 'Analyze'}
           </button>
