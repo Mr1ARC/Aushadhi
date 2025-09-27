@@ -5,10 +5,29 @@ function App() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [preview, setPreview] = useState(null);
 
+  // In src/App.jsx, replace the old function with this one
   const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setResult(null); // Clear previous results when a new file is selected
+    const file = event.target.files[0];
+    if (!file) {
+      setPreview(null); // Clear preview if no file is selected
+      return;
+    };
+
+    const MAX_SIZE = 5 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      alert(`File is too large! Please upload a file smaller than ${MAX_SIZE / 1024 / 1024}MB.`);
+      event.target.value = null;
+      setSelectedFile(null);
+      setResult(null);
+      setPreview(null); // Clear preview on error
+      return;
+    }
+
+    setSelectedFile(file);
+    setResult(null);
+    setPreview(URL.createObjectURL(file)); // <-- 2. CREATE AND SET PREVIEW URL
   };
 
   const handleAnalyze = async () => {
@@ -70,12 +89,24 @@ function App() {
         <p>Upload a medicine package image to verify</p>
         
         <div className="uploader">
-          <input type="file" accept="image/png, image/jpeg, image/bmp" onChange={handleFileChange} />
+          <input
+            type="file"
+            accept="image/png, image/jpeg, image/bmp"
+            onChange={handleFileChange}
+          />
           <button onClick={handleAnalyze} disabled={!selectedFile || isLoading}>
             {isLoading ? 'Analyzing...' : 'Analyze'}
           </button>
         </div>
 
+        {/* -- 3. ADD PREVIEW IMAGE ELEMENT -- */}
+        {preview && (
+          <div className="preview-container">
+            <h3>Preview:</h3>
+            <img src={preview} alt="Selected preview" className="preview-image" />
+          </div>
+        )}
+        
         {isLoading && <p>Loading...</p>}
         {renderResult()}
       </header>
