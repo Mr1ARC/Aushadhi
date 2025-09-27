@@ -18,7 +18,7 @@ Aushadhi is a modern full-stack application built using the following core techn
 
 | Component | Technology | Description |
 | :--- | :--- | :--- |
-| *Frontend* | *JavaScript, CSS* | The client-side application structure and styling. Likely utilizes a framework like React, Vue, or Angular. |
+| *Frontend* | *JavaScript, CSS, React* | The client-side application structure and styling. Likely utilizes a framework like React, Vue, or Angular. |
 | *Backend* | *Python* | The server-side logic, data processing, and API endpoints. |
 | *Deployment* | *Shell* | Custom shell scripts (deploy.sh) for automation and deployment. |
 | *Package Mgmt* | *package.json* | Used for managing JavaScript (and possibly other) dependencies. |
