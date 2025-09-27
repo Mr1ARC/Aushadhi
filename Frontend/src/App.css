@@ -56,3 +56,25 @@ button:hover:not(:disabled) {
   border-radius: 8px;
   border: 1px solid #61dafb;
 }
+
+
+/* Add these styles to the bottom of src/App.css */
+.history-container {
+  margin-top: 30px;
+  width: 80%;
+  max-width: 500px;
+  border-top: 1px solid #61dafb;
+  padding-top: 10px;
+}
+
+.history-item {
+  background-color: #3a3f4a;
+  border-radius: 5px;
+  padding: 5px 15px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.history-item p {
+  margin: 5px 0;
+}

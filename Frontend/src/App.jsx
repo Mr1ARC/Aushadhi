@@ -6,6 +6,7 @@ function App() {
   const [result, setResult] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [preview, setPreview] = useState(null);
+  const [scanHistory, setScanHistory] = useState([]);
 
   // In src/App.jsx, replace the old function with this one
   const handleFileChange = (event) => {
@@ -51,6 +52,15 @@ function App() {
 
       const data = await response.json();
       setResult(data);
+
+      // --- 2. UPDATE HISTORY ON SUCCESS ---
+      if (data.status === 'success' && data.match_found) {
+        // Add the new result to the start of the history array
+        setScanHistory(prevHistory => [data, ...prevHistory].slice(0, 5)); // Keep last 5 scans
+      }
+      // --- END OF HISTORY UPDATE ---
+
+
     } catch (error) {
       console.error("Error during analysis:", error);
       setResult({ status: 'error', message: 'Failed to connect to the API.' });
@@ -109,6 +119,25 @@ function App() {
         
         {isLoading && <p>Loading...</p>}
         {renderResult()}
+
+
+        {/* --- 3. ADD HISTORY SECTION --- */}
+        {scanHistory.length > 0 && (
+          <div className="history-container">
+            <h2>Recent Scans</h2>
+            {scanHistory.map((item, index) => (
+              <div key={index} className="history-item">
+                <p><strong>{item.details.brand_name}</strong> ({item.confidence}%)</p>
+              </div>
+            ))}
+          </div>
+        )}
+        {/* --- END OF HISTORY SECTION --- */}
+
+
+
+
+
       </header>
     </div>
   );
