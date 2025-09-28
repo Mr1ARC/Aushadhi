@@ -58,7 +58,7 @@ You will need the following installed:
 
     # Run the backend server
     # Note: Replace with the actual run command (e.g., python app.py or uvicorn main:app)
-    python app.py 
+    python3 app.py 
     cd ..
     
 
