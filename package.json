@@ -1,16 +1,32 @@
 {
-  "name": "medverify-ai",
-  "version": "1.0.0",
+  "name": "aushadhi-ocr",
+  "version": "2.0.0",
   "description": "AI-powered medicine verification system using OCR technology",
+  "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd Frontend && npm run dev\" \"cd backend && python app.py\"",
-    "frontend": "cd Frontend && npm run dev",
-    "backend": "cd backend && python app.py"
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "cd backend && python app.py",
+    "dev:frontend": "cd Frontend && npm run dev",
+    "build": "cd Frontend && npm run build",
+    "install:all": "cd Frontend && npm install && cd ../backend && pip install -r requirements.txt",
+    "start": "cd backend && python app.py"
   },
-  "dependencies": {
-    "lucide-react": "^0.544.0"
-  },
+  "keywords": [
+    "medicine",
+    "verification",
+    "ocr",
+    "ai",
+    "healthcare",
+    "counterfeit-detection",
+    "pharmaceutical"
+  ],
+  "author": "Aushadhi-OCR Team",
+  "license": "MIT",
   "devDependencies": {
-    "concurrently": "^9.1.0"
+    "concurrently": "^9.2.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "python": ">=3.11.0"
   }
 }
